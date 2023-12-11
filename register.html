@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      h3 {
+        display: flex;
+        justify-content: center;
+      }
+      form {
+        width: 400px;
+        padding: 10px;
+        border: 1px solid #000;
+      }
+      input {
+        width: 100%;
+        padding: 4px 0;
+        margin-bottom: 10px;
+      }
+      button {
+        width: 100%;
+        background-color: #0c6efd;
+        color: #fff;
+        padding: 5px 0;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form">
+      <h3>Register</h3>
+      <label for=""> Email </label>
+      <input
+        id="email"
+        type="email"
+        placeholder="Enter your email address"
+      /><br />
+      <label for=""> Password </label>
+      <input
+        id="pass"
+        type="password"
+        placeholder="Enter your password"
+      /><br />
+      <label for=""> Confirm Password </label>
+      <input
+        id="rpass"
+        type="password"
+        placeholder="Enter confirm your password"
+      /><br />
+      <button type="submit">Register</button>
+    </form>
+    <script>
+      const form = document.getElementById("form");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const usersLocal = JSON.parse(localStorage.getItem("users")) || [];
+
+        const email = document.getElementById("email").value;
+        const pass = document.getElementById("pass").value;
+        const rpass = document.getElementById("rpass").value;
+        const newUser = {
+          email: email,
+          password: pass,
+        };
+        if (email === "" || pass === "" || rpass === "") {
+          alert("Nhập thiếu");
+        } else {
+          if (pass == rpass) {
+            usersLocal.push(newUser);
+            localStorage.setItem("users", JSON.stringify(usersLocal));
+            window.location.href = "./login.html";
+          } else {
+            alert("nhập sai mật khẩu");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

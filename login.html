@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      h3 {
+        display: flex;
+        justify-content: center;
+      }
+      form {
+        width: 400px;
+        padding: 10px;
+        border: 1px solid #000;
+      }
+      input {
+        width: 100%;
+        padding: 4px 0;
+        margin-bottom: 10px;
+      }
+      button {
+        width: 100%;
+        background-color: #0c6efd;
+        color: #fff;
+        padding: 5px 0;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form">
+      <h3>Login</h3>
+      <label for="">Email</label>
+      <input id="email" type="email" placeholder="Your email" /><br />
+      <label for="">Password</label>
+      <input id="pass" type="password" placeholder="Your password" /><br />
+      <input id="remember" type="checkbox" style="width: unset" />
+      <label for="">Remember me</label><br />
+      <button type="submit">Login</button>
+    </form>
+    <script>
+      const form = document.getElementById("form");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const pass = document.getElementById("pass").value;
+        const remember = document.getElementById("remember").value;
+        const userConvertTypeJS = JSON.parse(localStorage.getItem("users"));
+        if (email === "" || pass === "") {
+          alert("Nhập thiếu");
+        } else {
+          for (let i = 0; i < userConvertTypeJS.length; i++) {
+            if (
+              email == userConvertTypeJS[i].email &&
+              pass == userConvertTypeJS[i].password
+            ) {
+              window.location.href = "./index.html";
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
